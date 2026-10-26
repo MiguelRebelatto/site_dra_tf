@@ -10,17 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AreaReservadaRouteImport } from './routes/area-reservada'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as CursosRouteImport } from './routes/cursos'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TermosRouteImport } from './routes/termos'
+import { Route as AreaReservadaConteudosRouteImport } from './routes/area-reservada_.conteudos'
 import { Route as ArtigosIndexRouteImport } from './routes/artigos.index'
 import { Route as ArtigosSlugRouteImport } from './routes/artigos.$slug'
+import { Route as AreaReservadaConteudosIdRouteImport } from './routes/area-reservada_.conteudos_.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreaReservadaRoute = AreaReservadaRouteImport.update({
+  id: '/area-reservada',
+  path: '/area-reservada',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactoRoute = ContactoRouteImport.update({
@@ -48,6 +56,11 @@ const TermosRoute = TermosRouteImport.update({
   path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AreaReservadaConteudosRoute = AreaReservadaConteudosRouteImport.update({
+  id: '/area-reservada_/conteudos',
+  path: '/area-reservada/conteudos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArtigosIndexRoute = ArtigosIndexRouteImport.update({
   id: '/artigos/',
   path: '/artigos/',
@@ -58,80 +71,107 @@ const ArtigosSlugRoute = ArtigosSlugRouteImport.update({
   path: '/artigos/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AreaReservadaConteudosIdRoute =
+  AreaReservadaConteudosIdRouteImport.update({
+    id: '/area-reservada_/conteudos_/$id',
+    path: '/area-reservada/conteudos/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/area-reservada': typeof AreaReservadaRoute
   '/contacto': typeof ContactoRoute
   '/cursos': typeof CursosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/area-reservada/conteudos': typeof AreaReservadaConteudosRoute
   '/artigos/$slug': typeof ArtigosSlugRoute
   '/artigos/': typeof ArtigosIndexRoute
+  '/area-reservada/conteudos/$id': typeof AreaReservadaConteudosIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/area-reservada': typeof AreaReservadaRoute
   '/contacto': typeof ContactoRoute
   '/cursos': typeof CursosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/area-reservada/conteudos': typeof AreaReservadaConteudosRoute
   '/artigos/$slug': typeof ArtigosSlugRoute
   '/artigos': typeof ArtigosIndexRoute
+  '/area-reservada/conteudos/$id': typeof AreaReservadaConteudosIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/area-reservada': typeof AreaReservadaRoute
   '/contacto': typeof ContactoRoute
   '/cursos': typeof CursosRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/area-reservada_/conteudos': typeof AreaReservadaConteudosRoute
   '/artigos/$slug': typeof ArtigosSlugRoute
   '/artigos/': typeof ArtigosIndexRoute
+  '/area-reservada_/conteudos_/$id': typeof AreaReservadaConteudosIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/area-reservada'
     | '/contacto'
     | '/cursos'
     | '/privacidade'
     | '/sobre'
     | '/termos'
+    | '/area-reservada/conteudos'
     | '/artigos/$slug'
     | '/artigos/'
+    | '/area-reservada/conteudos/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/area-reservada'
     | '/contacto'
     | '/cursos'
     | '/privacidade'
     | '/sobre'
     | '/termos'
+    | '/area-reservada/conteudos'
     | '/artigos/$slug'
     | '/artigos'
+    | '/area-reservada/conteudos/$id'
   id:
     | '__root__'
     | '/'
+    | '/area-reservada'
     | '/contacto'
     | '/cursos'
     | '/privacidade'
     | '/sobre'
     | '/termos'
+    | '/area-reservada_/conteudos'
     | '/artigos/$slug'
     | '/artigos/'
+    | '/area-reservada_/conteudos_/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AreaReservadaRoute: typeof AreaReservadaRoute
   ContactoRoute: typeof ContactoRoute
   CursosRoute: typeof CursosRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   SobreRoute: typeof SobreRoute
   TermosRoute: typeof TermosRoute
+  AreaReservadaConteudosRoute: typeof AreaReservadaConteudosRoute
   ArtigosSlugRoute: typeof ArtigosSlugRoute
   ArtigosIndexRoute: typeof ArtigosIndexRoute
+  AreaReservadaConteudosIdRoute: typeof AreaReservadaConteudosIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/area-reservada': {
+      id: '/area-reservada'
+      path: '/area-reservada'
+      fullPath: '/area-reservada'
+      preLoaderRoute: typeof AreaReservadaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contacto': {
@@ -178,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/area-reservada_/conteudos': {
+      id: '/area-reservada_/conteudos'
+      path: '/area-reservada/conteudos'
+      fullPath: '/area-reservada/conteudos'
+      preLoaderRoute: typeof AreaReservadaConteudosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/artigos/': {
       id: '/artigos/'
       path: '/artigos'
@@ -192,18 +246,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArtigosSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/area-reservada_/conteudos_/$id': {
+      id: '/area-reservada_/conteudos_/$id'
+      path: '/area-reservada/conteudos/$id'
+      fullPath: '/area-reservada/conteudos/$id'
+      preLoaderRoute: typeof AreaReservadaConteudosIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AreaReservadaRoute: AreaReservadaRoute,
   ContactoRoute: ContactoRoute,
   CursosRoute: CursosRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   SobreRoute: SobreRoute,
   TermosRoute: TermosRoute,
+  AreaReservadaConteudosRoute: AreaReservadaConteudosRoute,
   ArtigosSlugRoute: ArtigosSlugRoute,
   ArtigosIndexRoute: ArtigosIndexRoute,
+  AreaReservadaConteudosIdRoute: AreaReservadaConteudosIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -3,17 +3,17 @@ import { useState, type ReactNode } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site";
-const nav = [{ to: "/sobre", label: "Sobre" }, { to: "/cursos", label: "Cursos" }, { to: "/artigos", label: "Artigos" }, { to: "/contacto", label: "Contacto" }] as const;
+const nav = [{ to: "/sobre", label: "Sobre" }, { to: "/cursos", label: "Cursos" }, { to: "/artigos", label: "Artigos" }, { to: "/contacto", label: "Contacto" }, { to: "/area-reservada", label: "Área reservada" }] as const;
 export function Layout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   return <div className="min-h-screen flex flex-col">
     <header className="site-header border-b border-gold/40">
       <div className="mx-auto max-w-6xl px-6 py-5 flex items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-3" aria-label="Dra. Tatiana Santiago — Início"><span className="brand-mark" aria-hidden="true">ts</span><span><span className="block font-serif text-2xl text-primary leading-tight">Dra. Tatiana Santiago</span><span className="block text-[9px] uppercase tracking-widest text-olive">Fertilidade restaurativa do casal</span></span></Link>
-        <nav aria-label="Navegação principal" className="site-nav hidden md:flex items-center gap-7 text-sm">{nav.map(n => <Link key={n.to} to={n.to} activeProps={{ className: "text-primary" }} className="hover:text-primary">{n.label}</Link>)}<Button asChild variant="outline" className="rounded-full border-primary text-primary px-5"><Link to="/contacto">Marcar consulta <ArrowUpRight /></Link></Button></nav>
-        <Button variant="ghost" size="icon" className="md:hidden" aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
+        <nav aria-label="Navegação principal" className="site-nav hidden lg:flex items-center gap-5 text-sm">{nav.map(n => <Link key={n.to} to={n.to} activeProps={{ className: "text-primary" }} className="hover:text-primary">{n.label}</Link>)}<Button asChild variant="outline" className="rounded-full border-primary text-primary px-5"><Link to="/contacto">Marcar consulta <ArrowUpRight /></Link></Button></nav>
+        <Button variant="ghost" size="icon" className="lg:hidden" aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
       </div>
-      {open && <nav id="mobile-nav" aria-label="Navegação móvel" className="md:hidden border-t px-6 py-4 flex flex-col gap-3">{nav.map(n => <Link key={n.to} to={n.to} className="py-2 text-primary">{n.label}</Link>)}</nav>}
+      {open && <nav id="mobile-nav" aria-label="Navegação móvel" className="lg:hidden border-t px-6 py-4 flex flex-col gap-3">{nav.map(n => <Link key={n.to} to={n.to} className="py-2 text-primary">{n.label}</Link>)}</nav>}
     </header>
     <main className="flex-1">{children}</main>
     <footer className="bg-secondary/40 mt-20 border-t border-gold/40">

@@ -1,0 +1,48 @@
+# --- Dependências ---
+node_modules/
+
+# --- Build (Vite, TanStack Start, Nitro, GitHub Pages) ---
+dist/
+.output/
+.nitro/
+
+# --- Cloudflare / Wrangler (alvo Lovable) ---
+.wrangler/
+
+# --- Variáveis de ambiente (nunca commitar segredos) ---
+.env
+.env.*
+!.env.example
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Testes ---
+coverage/
+
+# --- Cache de ferramentas ---
+.vite/
+*.tsbuildinfo
+vite.config.*.timestamp-*
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+
+# --- Editores / IDE ---
+.idea/
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# --- Temporários locais ---
+.tmp/
+tmp/
