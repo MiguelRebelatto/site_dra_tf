@@ -1,0 +1,61 @@
+import { r as SITE, t as ARTICLES } from "./site-d6Tyfikp.js";
+import { createFileRoute, lazyRouteComponent, notFound } from "@tanstack/react-router";
+//#region src/routes/artigos.$slug.tsx
+var $$splitComponentImporter = () => import("./artigos._slug-DUEkVr8c.js");
+var Route = createFileRoute("/artigos/$slug")({
+	loader: ({ params }) => {
+		const a = ARTICLES.find((x) => x.slug === params.slug);
+		if (!a) throw notFound();
+		return a;
+	},
+	head: ({ loaderData: a, params }) => a ? {
+		meta: [
+			{ title: `${a.title} — Dra. Tatiana Santiago` },
+			{
+				name: "description",
+				content: a.excerpt
+			},
+			{
+				property: "og:title",
+				content: a.title
+			},
+			{
+				property: "og:description",
+				content: a.excerpt
+			},
+			{
+				property: "og:type",
+				content: "article"
+			},
+			{
+				name: "twitter:card",
+				content: "summary_large_image"
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `/artigos/${params.slug}`
+		}],
+		scripts: [{
+			type: "application/ld+json",
+			children: JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Article",
+				headline: a.title,
+				datePublished: a.published,
+				dateModified: a.reviewed,
+				author: {
+					"@type": "Physician",
+					name: SITE.doctor,
+					identifier: SITE.om
+				}
+			})
+		}]
+	} : { meta: [{ title: "Artigo indisponível" }, {
+		name: "robots",
+		content: "noindex"
+	}] },
+	component: lazyRouteComponent($$splitComponentImporter, "component")
+});
+//#endregion
+export { Route as t };

@@ -3,6 +3,7 @@ import { Layout } from "@/components/Layout";
 import { ArticleCard } from "@/components/ArticleCard";
 import { InstagramFeed } from "@/components/InstagramFeed";
 import { COURSES, SITE, sortedArticles } from "@/lib/site";
+import { withBasePath } from "@/lib/utils";
 import hero from "@/assets/tatiana-consulta-clean.jpg";
 import portrait from "@/assets/tatiana-retrato.jpg.asset.json";
 import { ArrowRight, ArrowUpRight, Sprout } from "lucide-react";
@@ -47,7 +48,7 @@ function Home() {
     </section>
     <section className="border-y border-gold/40 bg-secondary/30"><div className="mx-auto max-w-6xl px-6 py-6 grid gap-4 md:grid-cols-3 text-sm text-olive">{["Um olhar sobre o casal", "Cuidado individualizado", "Medicina baseada em evidência"].map(t => <p key={t} className="flex items-center justify-center gap-3"><Sprout size={17} strokeWidth={1} />{t}</p>)}</div></section>
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-24 grid gap-12 md:grid-cols-[.85fr_1fr] items-center">
-      <div className="relative md:pr-10"><img src={portrait.url} alt="Dra. Tatiana Santiago" width={640} height={696} loading="lazy" className="portrait-photo" /><p className="mt-4 text-xs text-olive">Dra. Tatiana Fonseca Santiago · {SITE.om}</p></div>
+      <div className="relative md:pr-10"><img src={withBasePath(portrait.url)} alt="Dra. Tatiana Santiago" width={640} height={696} loading="lazy" className="portrait-photo" /><p className="mt-4 text-xs text-olive">Dra. Tatiana Fonseca Santiago · {SITE.om}</p></div>
       <div><p className="eyebrow section-label">Sobre a médica</p><h2 className="editorial-heading mt-5">Escutar. Compreender.<br /><em className="text-olive">Cuidar.</em></h2><p className="mt-6 text-muted-foreground">Médica dedicada à fertilidade restaurativa, acompanha casais que procuram compreender as causas das suas dificuldades em engravidar.</p><p className="mt-4 text-muted-foreground">A saúde reprodutiva merece um olhar atento sobre ambos os parceiros, o ciclo menstrual e a saúde hormonal.</p><Link to="/sobre" className="editorial-link mt-6">Conhecer a Dra. Tatiana <ArrowRight size={16} /></Link></div>
     </section>
     <section className="bg-secondary/30 py-20"><div className="mx-auto max-w-6xl px-6 grid gap-10 md:grid-cols-[.7fr_1.3fr]"><div><p className="eyebrow section-label">Aprender e compreender</p><h2 className="editorial-heading mt-5">Conhecimento<br />para o casal.</h2><p className="mt-5 max-w-xs text-muted-foreground">Conteúdos para compreender melhor a fertilidade e preparar a gravidez.</p></div><div>{COURSES.map((c,i) => <article key={c.slug} className="course-item"><p className="eyebrow">0{i+1} · Curso online</p><h3 className="text-3xl mt-3">{c.title}</h3><p className="mt-3 text-muted-foreground max-w-lg">{c.desc}</p><a href={c.url} target="_blank" rel="noreferrer" className="editorial-link mt-3">Ver na Hotmart <ArrowUpRight size={16} /></a></article>)}</div></div></section>

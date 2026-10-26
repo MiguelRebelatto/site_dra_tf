@@ -15,8 +15,14 @@ Não basta abrir os ficheiros com um duplo clique: este site precisa do ambiente
 ## Testes e publicação
 
 - Testes: `bun run test`.
-- Gerar a versão de produção: `bun run build`.
-- A configuração original usa TanStack Start e o alvo Cloudflare do Lovable; para alojar noutro serviço, um profissional deverá adaptar a configuração de publicação ao serviço escolhido. Este ZIP não é uma versão HTML estática pronta para qualquer alojamento.
+- Gerar a versão de produção (Lovable / Cloudflare): `bun run build`.
+- **GitHub Pages** (site estático no repositório `site_dra_tf`):
+  1. No GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+  2. Faça push para a branch `main` (ou execute manualmente o workflow *Deploy GitHub Pages*).
+  3. O site fica em `https://miguelrebelatto.github.io/site_dra_tf/`.
+  4. Build local: `npm run build:gh-pages` (saída em `dist/client/`).
+  5. Se renomear o repositório, altere `GITHUB_PAGES_BASE` no workflow `.github/workflows/deploy-pages.yml` e o valor por omissão em `vite.config.ts`.
+  6. Ao adicionar artigos, atualize também `src/lib/static-routes.ts` (rotas dinâmicas a pré-renderizar).
 - As dependências são descarregadas na instalação; não estão incluídas no ZIP.
 
 ## Dados ainda provisórios

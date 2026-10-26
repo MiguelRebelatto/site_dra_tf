@@ -1,0 +1,44 @@
+import { i as fmtDate } from "./site-d6Tyfikp.js";
+import { Link } from "@tanstack/react-router";
+import { jsx, jsxs } from "react/jsx-runtime";
+//#region src/components/ArticleCard.tsx
+function ArticleCard({ a }) {
+	return /* @__PURE__ */ jsxs(Link, {
+		to: "/artigos/$slug",
+		params: { slug: a.slug },
+		className: "group block",
+		children: [/* @__PURE__ */ jsx("div", {
+			className: "overflow-hidden",
+			children: /* @__PURE__ */ jsx("img", {
+				src: a.cover,
+				alt: a.title,
+				loading: "lazy",
+				width: 1200,
+				height: 800,
+				className: "article-image aspect-[3/2] w-full object-cover"
+			})
+		}), /* @__PURE__ */ jsxs("div", {
+			className: "pt-5 border-t border-gold/40 mt-4",
+			children: [
+				/* @__PURE__ */ jsxs("p", {
+					className: "text-xs uppercase tracking-widest text-olive",
+					children: [
+						a.category,
+						" · ",
+						fmtDate(a.published)
+					]
+				}),
+				/* @__PURE__ */ jsx("h3", {
+					className: "mt-2 text-2xl group-hover:underline",
+					children: a.title
+				}),
+				/* @__PURE__ */ jsx("p", {
+					className: "mt-2 text-sm text-muted-foreground",
+					children: a.excerpt
+				})
+			]
+		})]
+	});
+}
+//#endregion
+export { ArticleCard as t };
