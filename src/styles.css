@@ -1,0 +1,126 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Nunito Sans", system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sand: var(--sand);
+  --color-blush: var(--blush);
+  --color-olive: var(--olive);
+  --color-gold: var(--gold);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.954 0.013 67);   /* creme #F6EFE8 */
+  --foreground: oklch(0.335 0.008 50);   /* grafite quente */
+  --card: oklch(0.975 0.009 67);
+  --card-foreground: oklch(0.335 0.008 50);
+  --popover: oklch(0.975 0.009 67);
+  --popover-foreground: oklch(0.335 0.008 50);
+  --primary: oklch(0.5 0.06 15);         /* rosa profundo */
+  --primary-foreground: oklch(0.985 0.005 67);
+  --secondary: oklch(0.85 0.025 70);     /* areia */
+  --secondary-foreground: oklch(0.335 0.008 50);
+  --muted: oklch(0.9 0.02 70);
+  --muted-foreground: oklch(0.48 0.012 50);
+  --accent: oklch(0.85 0.045 15);        /* rosa aquarela */
+  --accent-foreground: oklch(0.335 0.008 50);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.85 0.025 70);
+  --input: oklch(0.85 0.025 70);
+  --ring: oklch(0.5 0.06 15);
+  --sand: oklch(0.85 0.025 70);
+  --blush: oklch(0.85 0.045 15);
+  --olive: oklch(0.49 0.06 108);         /* oliva profundo */
+  --gold: oklch(0.7 0.06 75);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; color: var(--color-primary); }
+}
+
+@utility frame-gold {
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+}
+
+@utility divider-leaf {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+:root {
+  --hero-wash: linear-gradient(90deg, var(--background) 0%, var(--background) 35%, color-mix(in oklab, var(--background) 90%, transparent) 45%, transparent 65%);
+  --shadow-editorial: 0 12px 36px color-mix(in oklab, var(--foreground) 8%, transparent);
+}
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { line-height: 1.7; }
+  h1, h2, h3 { line-height: 1.1; letter-spacing: 0; }
+  ::selection { background: var(--blush); color: var(--foreground); }
+}
+.site-header { background: var(--background); position: relative; z-index: 20; }
+.brand-mark { border: 1px solid var(--gold); width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-serif); color: var(--primary); font-size: 25px; }
+.site-nav a { position: relative; padding-block: 8px; }
+.site-nav a[data-status="active"]::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--primary); }
+.eyebrow { font-size: 11px; text-transform: uppercase; color: var(--olive); letter-spacing: .17em; }
+.home-cover { min-height: 650px; position: relative; background: var(--background); overflow: hidden; }
+.home-cover-photo { position: absolute; right: 0; top: 0; width: 64%; height: 100%; object-fit: cover; object-position: center 35%; }
+.home-cover::after { content: ''; position: absolute; inset: 0; background: var(--hero-wash); pointer-events: none; }
+.cover-content { position: relative; z-index: 1; padding-block: 85px; }
+.cover-title { font-size: 64px; max-width: 580px; }
+.cover-title em { color: var(--olive); font-weight: 400; }
+.editorial-link { display: inline-flex; align-items: center; gap: 14px; color: var(--primary); border-bottom: 1px solid var(--gold); padding-block: 10px; font-size: 13px; }
+.section-label { display: flex; align-items: center; gap: 16px; }
+.section-label::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
+.portrait-photo { aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+.editorial-heading { font-size: 48px; }
+.course-item { border-top: 1px solid var(--gold); padding-block: 32px; }
+.article-image { transition: transform .6s ease; }
+.group:hover .article-image { transform: scale(1.035); }
+.gallery-photo { aspect-ratio: 1; width: 100%; object-fit: cover; }
+.fade-in { animation: enter .8s ease both; }
+@keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 767px) {
+  .home-cover { min-height: auto; padding-top: 320px; }
+  .home-cover-photo { width: 100%; height: 360px; object-position: center 28%; }
+  .home-cover::after { background: linear-gradient(0deg, var(--background) 0%, var(--background) 43%, transparent 65%); }
+  .cover-content { padding-block: 24px 48px; }
+  .cover-title { font-size: 44px; }
+  .editorial-heading { font-size: 38px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .fade-in { animation: none; } .article-image { transition: none; } }
