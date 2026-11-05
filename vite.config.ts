@@ -12,6 +12,8 @@ import { EXTRA_PRERENDER_PATHS } from "./src/lib/static-routes";
 const githubPages = process.env.GITHUB_PAGES === "true";
 const githubPagesBase = process.env.GITHUB_PAGES_BASE ?? "/site_dra_tf/";
 
+const PRIVATE_PRERENDER_PATHS = ["/area-reservada", "/area-reservada/conteudos"];
+
 export default defineConfig({
   vite: githubPages ? { base: githubPagesBase } : undefined,
   nitro: githubPages ? false : undefined,
@@ -24,6 +26,12 @@ export default defineConfig({
           prerender: {
             enabled: true,
             crawlLinks: false,
+            filter: (page) => {
+              const path = page.path;
+              const isPrivate = PRIVATE_PRERENDER_PATHS.includes(path)
+                || path.startsWith("/area-reservada/conteudos/");
+              return !isPrivate;
+            },
           },
           pages: EXTRA_PRERENDER_PATHS.map((path) => ({
             path,
