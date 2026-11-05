@@ -23,11 +23,11 @@ export default defineConfig({
       ? {
           prerender: {
             enabled: true,
-            crawlLinks: true,
+            crawlLinks: false,
           },
           pages: EXTRA_PRERENDER_PATHS.map((path) => ({
             path,
-            prerender: { enabled: true, crawlLinks: true },
+            prerender: { enabled: true, crawlLinks: false },
           })),
         }
       : {}),
