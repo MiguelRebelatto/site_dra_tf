@@ -25,6 +25,10 @@ Não basta abrir os ficheiros com um duplo clique: este site precisa do ambiente
   6. Ao adicionar artigos, atualize também `src/lib/static-routes.ts` (rotas dinâmicas a pré-renderizar).
 - As dependências são descarregadas na instalação; não estão incluídas no ZIP.
 
+## Área reservada
+
+O código `FERT_26` é verificado no frontend e a sessão é guardada no `sessionStorage`, sem depender de funções de servidor ou segredos de ambiente. **Isto é apenas uma barreira visual, não uma proteção de segurança:** o código e os conteúdos são enviados para o navegador e podem ser inspecionados ou contornados. Não utilize este modo para dados confidenciais ou pessoais.
+
 ## Dados ainda provisórios
 
 - Email, WhatsApp, Instagram e ligações Hotmart precisam de confirmação em `src/lib/site.ts`.
