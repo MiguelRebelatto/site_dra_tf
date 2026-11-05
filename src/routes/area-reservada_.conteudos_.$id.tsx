@@ -9,7 +9,7 @@ import { useReservedAccess } from "@/lib/reserved-access";
 const description = "Protocolo de acompanhamento disponível mediante código de acesso.";
 
 export const Route = createFileRoute("/area-reservada_/conteudos_/$id")({
-  loader: ({ params }) => PROTOCOLS.find((protocol) => protocol.id === params.id),
+  loader: ({ params }) => PROTOCOLS.find((protocol) => protocol.id === params.id) ?? null,
   staleTime: 0,
   gcTime: 0,
   preload: false,
@@ -26,8 +26,14 @@ function ReservedProtocol() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!unlocked) void router.navigate({ to: "/area-reservada", replace: true });
-    else if (!protocol) void router.navigate({ to: "/area-reservada/conteudos", replace: true });
+    if (!unlocked) {
+      void router.navigate({ to: "/area-reservada", replace: true });
+      return;
+    }
+
+    if (!protocol) {
+      void router.navigate({ to: "/area-reservada/conteudos", replace: true });
+    }
   }, [unlocked, protocol, router]);
 
   if (!unlocked || !protocol) return null;

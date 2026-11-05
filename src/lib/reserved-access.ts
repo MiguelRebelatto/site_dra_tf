@@ -4,14 +4,17 @@ export const RESERVED_ACCESS_CODE = "FERT_26";
 const ACCESS_KEY = "reserved-area-unlocked";
 
 export function hasReservedAccess() {
-  return typeof window !== "undefined" && window.sessionStorage.getItem(ACCESS_KEY) === "true";
+  if (typeof window === "undefined") return false;
+  return window.sessionStorage.getItem(ACCESS_KEY) === "true";
 }
 
 export function unlockReservedAccess() {
+  if (typeof window === "undefined") return;
   window.sessionStorage.setItem(ACCESS_KEY, "true");
 }
 
 export function lockReservedAccess() {
+  if (typeof window === "undefined") return;
   window.sessionStorage.removeItem(ACCESS_KEY);
 }
 
@@ -19,11 +22,11 @@ export function useReservedAccess() {
   const [unlocked, setUnlocked] = useState<boolean>(() => hasReservedAccess());
 
   useEffect(() => {
-    const syncAccess = () => setUnlocked(hasReservedAccess());
-    syncAccess();
+    const sync = () => setUnlocked(hasReservedAccess());
+    sync();
 
     const onStorage = (event: StorageEvent) => {
-      if (event.key === ACCESS_KEY) syncAccess();
+      if (event.key === ACCESS_KEY) sync();
     };
 
     window.addEventListener("storage", onStorage);
