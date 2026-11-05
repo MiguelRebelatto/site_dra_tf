@@ -10,7 +10,13 @@ const title = "Conteúdos reservados — Dra. Tatiana Santiago";
 const description = "Conteúdos de acompanhamento disponíveis mediante código de acesso.";
 
 export const Route = createFileRoute("/area-reservada_/conteudos")({
-  loader: () => ({ protocols: PROTOCOLS.map((protocol) => ({ id: protocol.id, title: protocol.title, summary: protocol.sections[0]?.subtitle || protocol.sections[0]?.title || "" })) }),
+  loader: () => ({
+    protocols: PROTOCOLS.map((protocol) => ({
+      id: protocol.id,
+      title: protocol.title,
+      summary: protocol.sections[0]?.subtitle || protocol.sections[0]?.title || "",
+    })),
+  }),
   staleTime: 0,
   gcTime: 0,
   preload: false,
@@ -24,7 +30,9 @@ function ReservedGallery() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!unlocked) void router.navigate({ to: "/area-reservada", replace: true });
+    if (!unlocked) {
+      void router.navigate({ to: "/area-reservada", replace: true });
+    }
   }, [unlocked, router]);
 
   if (!unlocked) return null;

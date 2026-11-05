@@ -1,13 +1,12 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
 import { LockKeyhole, ArrowRight } from "lucide-react";
+import { useState, type FormEvent } from "react";
 import { Layout, PageTitle } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { RESERVED_ACCESS_CODE, unlockReservedAccess } from "@/lib/reserved-access";
 
 const title = "Área reservada — Dra. Tatiana Santiago";
 const description = "Acesso reservado aos conteúdos de acompanhamento da Dra. Tatiana Santiago.";
-
 export const Route = createFileRoute("/area-reservada")({
   head: () => ({ meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ReservedEntry,
@@ -21,16 +20,20 @@ function ReservedEntry() {
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const code = new FormData(event.currentTarget).get("code");
+
     if (typeof code !== "string" || !code || code.length > 100) return;
 
     setBusy(true);
     setError("");
+
     if (code.trim() === RESERVED_ACCESS_CODE) {
       unlockReservedAccess();
-      void router.navigate({ to: "/area-reservada/conteudos" });
-    } else {
-      setError("Código de acesso incorreto.");
+      void router.navigate({ to: "/area-reservada/conteudos", replace: true });
+      setBusy(false);
+      return;
     }
+
+    setError("Código de acesso incorreto.");
     setBusy(false);
   }
 
