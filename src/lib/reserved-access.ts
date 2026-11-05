@@ -16,10 +16,18 @@ export function lockReservedAccess() {
 }
 
 export function useReservedAccess() {
-  const [unlocked, setUnlocked] = useState(false);
+  const [unlocked, setUnlocked] = useState<boolean>(() => hasReservedAccess());
 
   useEffect(() => {
-    setUnlocked(hasReservedAccess());
+    const syncAccess = () => setUnlocked(hasReservedAccess());
+    syncAccess();
+
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === ACCESS_KEY) syncAccess();
+    };
+
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
 
   return unlocked;
